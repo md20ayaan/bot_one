@@ -14,10 +14,14 @@ def generate_launch_description():
         )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
+    # Fetch the location of your newly compiled custom 3D maze world map asset
+    pkg_share = get_package_share_directory(package_name)
+    world_path = os.path.join(pkg_share, 'worlds', 'maze_world.sdf')
+
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'
-        )]), launch_arguments={'gz_args': '-r --render-engine ogre2 empty.sdf'}.items()
+        )]), launch_arguments={'gz_args': f'-r --render-engine ogre2 {world_path}'}.items()
     )
 
     spawn_entity = Node(

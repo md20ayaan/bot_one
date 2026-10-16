@@ -11,8 +11,9 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+# Install launch, description, and worlds directories cleanly
 install(
-  DIRECTORY launch description
+  DIRECTORY launch description worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
