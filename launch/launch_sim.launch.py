@@ -14,16 +14,6 @@ def generate_launch_description():
         )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
-    # Fetch the location of your newly compiled custom 3D maze world map asset
-    pkg_share = get_package_share_directory(package_name)
-    world_path = os.path.join(pkg_share, 'worlds', 'maze_world.sdf')
-
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-            get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'
-        )]), launch_arguments={'gz_args': f'-r --render-engine ogre2 {world_path}'}.items()
-    )
-
     spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
@@ -39,7 +29,8 @@ def generate_launch_description():
             '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
             '/model/my_bot/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/model/my_bot/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
-            '/model/my_bot/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry'
+            '/model/my_bot/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'
         ],
         remappings=[
             ('/model/my_bot/cmd_vel', '/cmd_vel'),
@@ -49,4 +40,4 @@ def generate_launch_description():
         output='screen'
     )
 
-    return LaunchDescription([rsp, gazebo, spawn_entity, bridge])
+    return LaunchDescription([rsp, spawn_entity, bridge])
