@@ -30,7 +30,9 @@ def generate_launch_description():
             '/model/my_bot/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
             '/model/my_bot/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/model/my_bot/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo'
         ],
         remappings=[
             ('/model/my_bot/cmd_vel', '/cmd_vel'),
