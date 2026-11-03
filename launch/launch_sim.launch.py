@@ -31,13 +31,19 @@ def generate_launch_description():
             '/model/my_bot/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
             '/model/my_bot/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
-            '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
-            '/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo'
+            '/camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+            '/camera/depth_image/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo'
         ],
         remappings=[
             ('/model/my_bot/cmd_vel', '/cmd_vel'),
             ('/model/my_bot/odometry', '/odom'),
-            ('/model/my_bot/tf', '/tf')
+            ('/model/my_bot/tf', '/tf'),
+            ('/camera/image', '/camera/image_raw'),
+            ('/camera/depth_image', '/camera/depth/image_raw'),
+            ('/camera/points', '/camera/depth/points'),
+            ('/camera/depth_image/camera_info', '/camera/depth/camera_info')
         ],
         output='screen'
     )
